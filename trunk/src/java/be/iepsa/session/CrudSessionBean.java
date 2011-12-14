@@ -69,6 +69,7 @@ public class CrudSessionBean {
         com.setIsapprouve(false);
         com.setDatecom(d);
         em.persist(com);
+        
         return true;
     }
 }
