@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <span style="color : red"><h:messages/></span>
+        
+        <h:form rendered="#{loginBean.connected}"><!-- -->
+            <h:outputText  value="#{loginBean.nomUti}"/> <br/>
+            <h:commandButton  value="Se deconnecter" action="#{loginBean.logout()}"/>
+        </h:form>        
+        <h:form rendered="#{!loginBean.connected}"> <!-- -->
+            <h:outputText  value="Nom utilisateur"/>
+            <h:inputText value="#{loginBean.nomUti}"/> <br/>
+            <h:outputText  value="Mot de passe"/>
+            <h:inputSecret value="#{loginBean.mdp}"/> <br/>
+            <h:commandButton  value="Se connecter" action="#{loginBean.login()}"/>
+            <h:commandButton  value="Creer un compte" action="#{loginBean.nouveauCompte}"/>
+        </h:form>
+        <h:form rendered="#{loginBean.isnew}"> <!-- -->
+            <h:outputText  value="Nom utilisateur"/>
+            <h:inputText value="#{loginBean.utilisateur.login}"/> <br/>
+            <h:outputText  value="Mot de passe"/>
+            <h:inputSecret value="#{loginBean.utilisateur.password}"/> <br/>
+            <h:outputText  value="Nom"/>
+            <h:inputText value="#{loginBean.utilisateur.nom}"/> <br/>
+            <h:outputText  value="Prenom"/>
+            <h:inputSecret value="#{loginBean.utilisateur.prenom}"/> <br/>
+            <h:outputText  value="Email"/>
+            <h:inputText value="#{loginBean.utilisateur.email}"/> <br/>
+
+            <h:commandButton  value="enregistrer" action="#{loginBean.nouveauMembre}"/>
+           
+        </h:form>
+        <h:dataTable value="#{loginBean.com}" var="commentaire">
+            <h:column>
+                <f:facet name="header">Livred'or</f:facet>
+                #{commentaire.commentaire}
+            </h:column>
+             <h:column>
+                <f:facet name="header">date</f:facet>
+                #{commentaire.datecom}
+            </h:column>
+             <h:column>
+                <f:facet name="header">utilisateur</f:facet>
+                #{commentaire.user.login}
+            </h:column>
+        </h:dataTable>
+        <h:form rendered="#{loginBean.connected}"><!-- -->
+            <h:inputTextarea  value="#{loginBean.message}"/> <br/>
+            <h:commandButton  value="Prospose" action="#{loginBean.nouveauMessage}"/>
+        </h:form>
+        
+    </h:body>
+</html>
+
