@@ -123,7 +123,11 @@ public class LoginBean {
 
     public String nouveauMessage(){
         // enregistrement dans la db via sessionbean
-        
+        Boolean test = c.createCommentaire(utilisateur, message);
+        if(test){
+            FacesMessage facesmsg = new FacesMessage("Message proposé en attente de la validation de l'admin !");
+            FacesContext.getCurrentInstance().addMessage(null, facesmsg);
+        }
         
         return "";
     }
