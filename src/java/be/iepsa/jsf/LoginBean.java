@@ -60,6 +60,11 @@ public class LoginBean implements Serializable{
           listcom= c.getCommentListApproved();    
           return listcom;
     }
+        public List<Commentaire> getListcomFalse() {
+          
+          listcom= c.getListCommentaires();    
+          return listcom;
+    }
 
     public void setListcom(List<Commentaire> listcom) {
         this.listcom = listcom;
