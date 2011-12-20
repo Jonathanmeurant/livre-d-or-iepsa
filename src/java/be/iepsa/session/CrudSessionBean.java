@@ -7,6 +7,7 @@ package be.iepsa.session;
 
 import be.iepsa.model.Commentaire;
 import be.iepsa.model.User;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -47,6 +48,23 @@ public class CrudSessionBean {
         return em.createQuery("Select u from User u").getResultList();
     }
 
+    public List<Commentaire>getCommentListApproved(){
+       
+        List<Commentaire> l = new ArrayList<Commentaire>();
+        l=em.createQuery("Select c from Commentaire c").getResultList();
+        System.out.println(l.size());
+        int i=0;
+        while( i<l.size()){
+            
+              if (l.get(i).isIsapprouve()==false){
+                  l.remove(l.get(i));
+                  i--;
+              }
+              i++;
+          }
+        return l;
+    }
+    
     public List<Commentaire> getListCommentaires(){
         return em.createQuery("Select c from Commentaire c").getResultList();
     }
