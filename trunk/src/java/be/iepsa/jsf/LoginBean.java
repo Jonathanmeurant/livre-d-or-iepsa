@@ -177,6 +177,12 @@ public class LoginBean implements Serializable{
          
         
     }
+    
+    public void updateCommentaire(Commentaire com){
+    com.setIsapprouve(true);
+    FacesMessage facesmsg = new FacesMessage("le commentaire à été validé");
+    FacesContext.getCurrentInstance().addMessage(null, facesmsg);
+    }
   
   
 }

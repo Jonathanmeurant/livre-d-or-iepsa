@@ -19,7 +19,7 @@
                          <p></p>
                  <!-- liste de commentaire , je ne sais pas comment afficher seulement 
                  les false pour l'admin et les true juste pour les simple utilisateur ainsi que la validation par l'admin-->        
-                         <h:dataTable value ="#{loginBean.listCommentaires}" var="commentaire">
+                 <h:dataTable value ="#{loginBean.listcom}" var="commentaire">
                                 <h:column>
                                    <f:facet name="header" > commentaire</f:facet> 
                                     #{commentaire.commentaire}
@@ -32,9 +32,12 @@
 
                                    <h:column>
                                    <f:facet name="header" > approuve</f:facet> 
-                            #{commentaire.isapprouve}
+                                    #{commentaire.isapprouve}
                                    </h:column>
-                             
+                                   <h:column>
+                                   <f:facet name="header" > validation</f:facet> 
+                                   <h:commandButton  value="valider" action="#{loginBean.updateCommentaire(commentaire)}"/>
+                                   </h:column>
                             </h:dataTable>
                                 <p></p>
                     </td>
