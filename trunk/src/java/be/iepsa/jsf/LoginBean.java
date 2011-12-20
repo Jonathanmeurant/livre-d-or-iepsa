@@ -14,7 +14,11 @@ import javax.ejb.EJB;
 import be.iepsa.model.User;
 import be.iepsa.session.CrudSessionBean;
 import java.io.Serializable;
+import java.util.List;
 import javax.annotation.PostConstruct;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 
 
@@ -34,7 +38,8 @@ public class LoginBean implements Serializable{
     private User utilisateur = new User();
     private Commentaire com = new Commentaire();
     private String message;
-   
+       @PersistenceContext(unitName="LivreDOrPU")
+    private EntityManager em;
     //*
     @EJB //*/ /*
     private CrudSessionBean c;
@@ -104,6 +109,7 @@ public class LoginBean implements Serializable{
     public boolean isConnected(){
       //*
        User u = c.getUser(nomUti);
+       
        //User u = em.find(User.class, nomUti);
        
        if(u != null){
@@ -114,6 +120,7 @@ public class LoginBean implements Serializable{
        //*/
        return isconnected;
     }
+    
      public String logout(){
         nomUti = "";
         mdp = "";
@@ -155,4 +162,17 @@ public class LoginBean implements Serializable{
             c.createUser2(admin);
         }
     }
+        public List<Commentaire> getListCommentairesFalse(){
+    TypedQuery<Commentaire> q = this.em.createQuery("Select c from Commentaire c WHERE c.isapprouve = :false", Commentaire.class);
+    return q.getResultList();
+    }
+    public List<Commentaire> getListCommentairesTrue(){
+    TypedQuery<Commentaire> q = this.em.createQuery("Select c from Commentaire c WHERE c.isapprouve = :true", Commentaire.class);
+    return q.getResultList();
+    }
+
+    public List<Commentaire> getListCommentaires(){
+        return em.createQuery("Select c from Commentaire c").getResultList();
+    }
+  
 }
