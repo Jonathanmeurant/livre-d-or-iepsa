@@ -102,6 +102,8 @@ public class LoginBean {
         if(! isConnected()){
             FacesMessage facesmsg = new FacesMessage("Le nomUtilisateur ou le mot de passe ne sont pas bon !");
             FacesContext.getCurrentInstance().addMessage(null, facesmsg);
+        }else{
+            utilisateur = c.getUser(nomUti);
         }
         return "";
     }
