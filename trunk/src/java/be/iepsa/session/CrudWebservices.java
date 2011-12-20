@@ -60,12 +60,13 @@ public class CrudWebservices {
     public List<Commentaire> getListCommentaires(){
         return em.createQuery("Select c from Commentaire c").getResultList();
     }
-    public List<Commentaire> getListCommentairesFalse(){
-    TypedQuery<Commentaire> q = this.em.createQuery("Select c from Commentaire c WHERE c.isapprouve = :false", Commentaire.class);
-    return q.getResultList();
-    }
+
     public List<Commentaire> getListCommentairesTrue(){
     TypedQuery<Commentaire> q = this.em.createQuery("Select c from Commentaire c WHERE c.isapprouve = :true", Commentaire.class);
+    return q.getResultList();
+    }
+            public List<Commentaire> getListCommentairesFalse(){
+    TypedQuery<Commentaire> q = this.em.createQuery("Select c from Commentaire c WHERE c.isapprouve = :false", Commentaire.class);
     return q.getResultList();
     }
 }
