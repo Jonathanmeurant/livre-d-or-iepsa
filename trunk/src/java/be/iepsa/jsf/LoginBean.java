@@ -13,8 +13,7 @@ import javax.ejb.EJB;
 
 import be.iepsa.model.User;
 import be.iepsa.session.CrudSessionBean;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
+
 
 
 
@@ -33,16 +32,26 @@ public class LoginBean {
     private User utilisateur = new User();
     private Commentaire com = new Commentaire();
     private String message;
-    //*
-    @PersistenceContext(unitName="LivreDOrPU")
-    private EntityManager em;
-    //*/
+   
     //*
     @EJB //*/ /*
     private CrudSessionBean c;
     // */
     public LoginBean() {
         super();
+        /*
+        if(c.isNewDb()){
+            User admin = new User();
+            admin.setLogin("admin");
+            admin.setPassword("admin");
+            admin.setIsAdmin(true);
+            admin.setEmail("admin@admin.com");
+            admin.setNom("admin");
+            c.createUser2(admin);
+        
+        }
+         // */
+       // setAdmin();
     }
 
     public String getMdp() {
@@ -60,7 +69,7 @@ public class LoginBean {
     public void setNomUti(String nomUti) {
         this.nomUti = nomUti;
     }
-
+    
     public Boolean getIsnew() {
         return isnew;
     }
@@ -138,5 +147,17 @@ public class LoginBean {
         FacesMessage facesmsg = new FacesMessage("Utilisateur est créé!");
         FacesContext.getCurrentInstance().addMessage(null, facesmsg);
         return "";
+    }
+
+    private void setAdmin() {
+         if(c.isNewDb()){
+            User admin = new User();
+            admin.setLogin("admin");
+            admin.setPassword("admin");
+            admin.setIsAdmin(true);
+            admin.setEmail("admin@admin.com");
+            admin.setNom("admin");
+            c.createUser2(admin);
+        }
     }
 }

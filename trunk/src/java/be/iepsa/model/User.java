@@ -33,7 +33,7 @@ public class User implements Serializable {
     @Column (name="Prenom")
     private String prenom;
     @Column(name="IsAdmin")
-    private boolean isAdmin;
+    private boolean isAdmin = new Boolean(false);
     @Column(name="Password")
     private String password;
     @OneToMany(cascade= CascadeType.ALL,mappedBy="user")
