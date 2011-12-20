@@ -21,6 +21,8 @@ public interface CrudSessionService {
     public void test(String Login);
     public List<User> getListUsers();
     public List<Commentaire> getListCommentaires();
+    public List<Commentaire> getListCommentairesFalse();
+    public List<Commentaire> getListCommentairesTrue();
     public User getUser(String nomUti);
     public boolean createCommentaire(User u, String msg);
 }
