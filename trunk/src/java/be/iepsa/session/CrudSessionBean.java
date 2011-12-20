@@ -112,16 +112,7 @@ public class CrudSessionBean {
     }
 
     public boolean isNewDb() {
-       /*
-        User admin = em.find(User.class, "admin");
-        if(admin.getLogin() == null){
-            return true;
-        }
-        else{
-            return false;
-        }
-        //*/
-        //return em.find(User.class, "admin") == null ? true : false;
+       
        User admin = new User();
 
         try {

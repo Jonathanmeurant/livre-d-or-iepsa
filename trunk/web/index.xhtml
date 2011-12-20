@@ -87,17 +87,18 @@
             </table>
         </h:form>
         <h:form rendered="#{loginBean.isnew}"> <!-- -->
+            <h:panelGrid border="1" columns="2">
             <h:outputText  value="Nom utilisateur"/>
-            <h:inputText value="#{loginBean.utilisateur.login}"/> <br/>
+            <h:inputText value="#{loginBean.utilisateur.login}"/> 
             <h:outputText  value="Mot de passe"/>
-            <h:inputSecret value="#{loginBean.utilisateur.password}"/> <br/>
+            <h:inputSecret value="#{loginBean.utilisateur.password}"/>
             <h:outputText  value="Nom"/>
-            <h:inputText value="#{loginBean.utilisateur.nom}"/> <br/>
+            <h:inputText value="#{loginBean.utilisateur.nom}"/> 
             <h:outputText  value="Prenom"/>
-            <h:inputText value="#{loginBean.utilisateur.prenom}"/> <br/>
+            <h:inputText value="#{loginBean.utilisateur.prenom}"/>
             <h:outputText  value="Email"/>
-            <h:inputText value="#{loginBean.utilisateur.email}"/> <br/>
-
+            <h:inputText value="#{loginBean.utilisateur.email}"/>
+            </h:panelGrid>
             <h:commandButton  value="enregistrer" action="#{loginBean.nouveauMembre}"/>
 
         </h:form>
