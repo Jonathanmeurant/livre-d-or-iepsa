@@ -85,6 +85,19 @@ public class CrudSessionBean {
             return false;
         }
         //*/
-        return em.find(User.class, "admin") == null ? true : false;
+        //return em.find(User.class, "admin") == null ? true : false;
+       User admin = new User();
+
+        try {
+            admin = em.find(User.class, "admin");
+        } catch(Exception e) {
+            return true;
+        }
+        if(admin == null) {
+            return true;
+        }
+
+        return false;
+
     }
 }

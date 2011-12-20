@@ -13,6 +13,8 @@ import javax.ejb.EJB;
 
 import be.iepsa.model.User;
 import be.iepsa.session.CrudSessionBean;
+import java.io.Serializable;
+import javax.annotation.PostConstruct;
 
 
 
@@ -23,7 +25,7 @@ import be.iepsa.session.CrudSessionBean;
  */
 @ManagedBean
 @SessionScoped
-public class LoginBean {
+public class LoginBean implements Serializable{
 
     private String nomUti = "";
     private String mdp = "";
@@ -39,21 +41,12 @@ public class LoginBean {
     // */
     public LoginBean() {
         super();
-        /*
-        if(c.isNewDb()){
-            User admin = new User();
-            admin.setLogin("admin");
-            admin.setPassword("admin");
-            admin.setIsAdmin(true);
-            admin.setEmail("admin@admin.com");
-            admin.setNom("admin");
-            c.createUser2(admin);
         
-        }
-         // */
-       // setAdmin();
     }
-
+    @PostConstruct
+    public void init() {
+        setAdmin();
+    }
     public String getMdp() {
         return mdp;
     }
