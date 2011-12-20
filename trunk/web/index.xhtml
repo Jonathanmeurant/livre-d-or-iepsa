@@ -71,7 +71,7 @@
             <h:commandButton  value="enregistrer" action="#{loginBean.nouveauMembre}"/>
 
         </h:form>
-        <h:dataTable value="#{loginBean.com}" var="commentaire">
+        <h:dataTable value="#{loginBean.listcom}" var="commentaire">
             <h:column>
                 <f:facet name="header">Livre d'or</f:facet>
                 #{commentaire.commentaire}
