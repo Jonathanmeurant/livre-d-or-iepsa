@@ -57,6 +57,8 @@ public class CrudSessionBean {
     }
 
     public void createUser2(User u) {
+        // implanter la methode sha1
+
         em.persist(u);
     }
 
@@ -71,5 +73,18 @@ public class CrudSessionBean {
         em.persist(com);
         
         return true;
+    }
+
+    public boolean isNewDb() {
+       /*
+        User admin = em.find(User.class, "admin");
+        if(admin.getLogin() == null){
+            return true;
+        }
+        else{
+            return false;
+        }
+        //*/
+        return em.find(User.class, "admin") == null ? true : false;
     }
 }
