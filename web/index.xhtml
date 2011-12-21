@@ -118,7 +118,9 @@
                             <f:facet name="header">utilisateur</f:facet>
                             #{commentaire.user.login}
                         </h:column>
-                        
+                        <!--<h:column>
+                            <h:commandButton  value="X" action="#{loginBean.delComUser(commentaire)}" rendered="#{loginBean.isuserCom(commentaire)}"/>
+                        </h:column>-->
                     </h:dataTable>
                     <h:form rendered="#{loginBean.connected}"><!-- -->
                         <h:inputTextarea  value="#{loginBean.message}"/> <br/>
