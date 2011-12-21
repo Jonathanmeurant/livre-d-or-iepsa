@@ -203,6 +203,12 @@ public class LoginBean implements Serializable{
     FacesContext.getCurrentInstance().addMessage(null, facesmsg);
         c.update(com);
     }
+    
+    
+    public List<User> getListuser(){
+        List<User> userlist = new ArrayList<User>();
+        return userlist;
+    }
   
     
 }
