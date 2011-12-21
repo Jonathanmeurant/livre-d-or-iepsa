@@ -207,7 +207,11 @@ public class LoginBean implements Serializable{
     
     public List<User> getListuser(){
         List<User> userlist = new ArrayList<User>();
+        userlist = c.getListUsers();
         return userlist;
+    }
+    public void deleteuser(String login){
+        c.delUser(login);
     }
   
     
