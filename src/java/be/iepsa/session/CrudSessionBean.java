@@ -70,8 +70,8 @@ public class CrudSessionBean {
           }
         return l;
     }
-        public List<Commentaire>getCommentListNoApproved(){
-
+    public List<Commentaire>getCommentListNoApproved(){
+        
         List<Commentaire> l = new ArrayList<Commentaire>();
         l=em.createQuery("Select c from Commentaire c").getResultList();
         System.out.println(l.size());
@@ -87,7 +87,6 @@ public class CrudSessionBean {
         return l;
     }
 
-
     public List<Commentaire> getListCommentaires(){
         return em.createQuery("Select c from Commentaire c").getResultList();
     }
@@ -98,7 +97,7 @@ public class CrudSessionBean {
     }
 
     public void createUser2(User u) {
-        // implanter la methode sha1
+        // methode sha1
         String pass= u.getPassword();
         try {
             u.setPassword(encrypt(pass));
@@ -144,16 +143,16 @@ public class CrudSessionBean {
  
     
     public String encrypt(String plaintext) throws NoSuchAlgorithmException, UnsupportedEncodingException 
-  {
-    MessageDigest md = null;
+    {
+        MessageDigest md = null;
  
-      md = MessageDigest.getInstance("SHA"); 
-      md.update(plaintext.getBytes("UTF-8")); 
+        md = MessageDigest.getInstance("SHA");
+        md.update(plaintext.getBytes("UTF-8"));
    
-      byte raw[] = md.digest(); 
-    String hash = (new BASE64Encoder()).encode(raw); 
-    return hash; 
-  }
+        byte raw[] = md.digest();
+        String hash = (new BASE64Encoder()).encode(raw);
+        return hash;
+     }
     
     public boolean delUser(String id){
         
@@ -168,5 +167,15 @@ public class CrudSessionBean {
            
             return true;
         }
+    }
+   /*
+    *@param id du commentaire a supprimer
+    */
+    public void delCommentaire(Long id){
+
+        Query q =  em.createQuery("DELETE FROM COMMENTAIRE u WHERE u.id = :id");
+        q.setParameter("id", id);
+        q.executeUpdate();
+       
     }
 }
