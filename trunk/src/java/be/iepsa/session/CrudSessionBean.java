@@ -18,6 +18,7 @@ import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import sun.misc.BASE64Encoder;
 
@@ -153,4 +154,18 @@ public class CrudSessionBean {
     String hash = (new BASE64Encoder()).encode(raw); 
     return hash; 
   }
+    
+    public boolean delUser(String id){
+        
+        User u = em.find(User.class, id);
+        
+        if(u.getLogin().equals("admin")||u.getLogin().equals(null)){
+            return false;
+        }else{
+           Query q =  em.createQuery("DELETE FROM TBL_UTILISATEUR  u WHERE ID=:id");
+            q.setParameter("id", id);
+            q.executeUpdate();
+            return true;
+        }
+    }
 }
