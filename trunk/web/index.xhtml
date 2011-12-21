@@ -126,16 +126,16 @@
                 </td>
             </tr>
             <td>
-            <h:form rendered="#{loginBean.utilisateur.isAdmin}"> 
+            <h:form rendered="#{loginBean.isAdmin}"> 
            
                 <h:dataTable value ="#{loginBean.listuser}" var ="user">
                  <h:column>
                      <f:facet name ="header">Utilisateur</f:facet>
                      #{user.login}
                  </h:column>
-                    <h:column>
+                  <h:column>
                         <f:facet name="header">administration</f:facet>
-                        <h:commandButton value="supprimer" action="#{loginBean.deleteuser(user.login)}"/>
+                        <h:commandButton value="supprimer" action="#{loginBean.deleteuser(user)}"/>
                     </h:column>
                 </h:dataTable>
               </h:form>
