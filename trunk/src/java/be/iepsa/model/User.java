@@ -46,7 +46,7 @@ public class User implements Serializable {
         this.Email = Email;
     }
 
-    public boolean isIsAdmin() {
+    public boolean getIsAdmin() {
         return isAdmin;
     }
 

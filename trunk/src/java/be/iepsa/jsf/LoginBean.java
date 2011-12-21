@@ -64,7 +64,7 @@ public class LoginBean implements Serializable{
           listcom= c.getCommentListApproved();    
           return listcom;
     }
-        public List<Commentaire> getListcomFalse() {
+     public List<Commentaire> getListcomFalse() {
           
           listcom= c.getCommentListNoApproved();
           return listcom;
@@ -129,13 +129,9 @@ public class LoginBean implements Serializable{
     }
 
     public boolean isConnected(){
-      //*
-       User u = c.getUser(nomUti);
-       
-       //User u = em.find(User.class, nomUti);
-       
-       if(u != null){
-           
+     
+       User u = c.getUser(nomUti);      
+       if(u != null){           
            String cryptedmdp="";
             try 
             {
@@ -149,16 +145,16 @@ public class LoginBean implements Serializable{
                 isconnected = true;
            }
        }
-       //*/
        return isconnected;
     }
-       
+    
      public String logout(){
         nomUti = "";
         mdp = "";
         isconnected = false;
         return "";
     }
+
     public String nouveauCompte(){
         isnew = true;
         return "";
@@ -171,7 +167,6 @@ public class LoginBean implements Serializable{
             FacesMessage facesmsg = new FacesMessage("Message proposé en attente de la validation de l'admin !");
             FacesContext.getCurrentInstance().addMessage(null, facesmsg);
         }
-        
         return "";
     }
     public String nouveauMembre(){
@@ -186,21 +181,19 @@ public class LoginBean implements Serializable{
     private void setAdmin() {
          if(c.isNewDb()){
             User admin = new User();
-            admin.setLogin("admin");
-            admin.setPassword("admin");
+           admin.setLogin("admin");
+           admin.setPassword("admin"); 
             admin.setIsAdmin(true);
             admin.setEmail("admin@admin.com");
             admin.setNom("admin");
             c.createUser2(admin);
         }
-         
-        
     }
     
     public void updateCommentaire(Commentaire com){
         com.setIsapprouve(!com.getIsapprouve());
-    FacesMessage facesmsg = new FacesMessage("le commentaire à été validé");
-    FacesContext.getCurrentInstance().addMessage(null, facesmsg);
+        FacesMessage facesmsg = new FacesMessage("le commentaire à été validé");
+        FacesContext.getCurrentInstance().addMessage(null, facesmsg);
         c.update(com);
     }
     
@@ -221,10 +214,14 @@ public class LoginBean implements Serializable{
            FacesContext.getCurrentInstance().addMessage(null, facesmsg);
        }
     }
+    /*
+     * @return vrai si c'est un admin ou faux si pas
+     *
+     */
     public boolean getIsAdmin(){
         boolean isadmin=false;
         if (isConnected()){
-            if(utilisateur.getLogin().equals("admin")){
+            if(utilisateur.getIsAdmin()){
                 isadmin= true;
             }
             else{
@@ -233,6 +230,18 @@ public class LoginBean implements Serializable{
         }
         return isadmin;
     }
-    
-    
+    /*
+     * @return vrai si le commentaire à été fait par l'utilisateur connecté
+     */
+    public Boolean isUserCom(Commentaire commentaire){
+        if(commentaire.getUser().getLogin().equals(utilisateur.getLogin())){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    public void delComUser(Commentaire commentaire){
+        c.delCommentaire(commentaire.getId());
+    }
 }
