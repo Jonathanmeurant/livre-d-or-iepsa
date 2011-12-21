@@ -21,7 +21,7 @@ import javax.persistence.TypedQuery;
  */
 @Stateless
 public class CrudSessionBean {
-    
+
     @PersistenceContext(unitName="LivreDOrPU")
     private EntityManager em;
 
@@ -31,8 +31,7 @@ public class CrudSessionBean {
         em.persist(u);
         return u;
     }
-    
-    
+
     public void createCommentaire(User u){
         Commentaire c = new Commentaire();
         c.setUser(u);
@@ -50,14 +49,13 @@ public class CrudSessionBean {
     }
 
     public List<Commentaire>getCommentListApproved(){
-       
-        List<Commentaire> l = new ArrayList<Commentaire>();
+
+        List<Commentaire> l = new ArrayList<Commentaire>();       
         l=em.createQuery("Select c from Commentaire c").getResultList();
         System.out.println(l.size());
         int i=0;
         while( i<l.size()){
-            
-              if (l.get(i).isIsapprouve()==false){
+              if (l.get(i).getIsapprouve()==false){
                   l.remove(l.get(i));
                   i--;
               }
@@ -66,14 +64,14 @@ public class CrudSessionBean {
         return l;
     }
         public List<Commentaire>getCommentListNoApproved(){
-       
+
         List<Commentaire> l = new ArrayList<Commentaire>();
         l=em.createQuery("Select c from Commentaire c").getResultList();
         System.out.println(l.size());
         int i=0;
         while( i<l.size()){
-            
-              if (l.get(i).isIsapprouve()==true){
+
+              if (l.get(i).getIsapprouve()==true){
                   l.remove(l.get(i));
                   i--;
               }
@@ -81,7 +79,7 @@ public class CrudSessionBean {
           }
         return l;
     }
-        
+
 
     public List<Commentaire> getListCommentaires(){
         return em.createQuery("Select c from Commentaire c").getResultList();
@@ -100,21 +98,20 @@ public class CrudSessionBean {
 
     public boolean createCommentaire(User u, String msg) {
         Date d = new Date();
-        
+
         Commentaire com = new Commentaire();
         com.setCommentaire(msg);
         com.setUser(u);
         com.setIsapprouve(false);
         com.setDatecom(d);
         em.persist(com);
-        
+
         return true;
     }
 
     public boolean isNewDb() {
-       
-       User admin = new User();
 
+       User admin = new User();
         try {
             admin = em.find(User.class, "admin");
         } catch(Exception e) {
@@ -123,8 +120,10 @@ public class CrudSessionBean {
         if(admin == null) {
             return true;
         }
-
         return false;
-
+    }
+    public void update(Commentaire com){
+        Commentaire c = em.find(Commentaire.class, com.getId());
+        c.setIsapprouve(com.getIsapprouve());
     }
 }

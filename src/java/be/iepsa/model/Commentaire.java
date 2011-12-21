@@ -48,7 +48,7 @@ public class Commentaire implements Serializable {
     public void setUser(User user) {
         this.user = user;
     }
-            
+
     public String getCommentaire() {
         return commentaire;
     }
@@ -65,7 +65,7 @@ public class Commentaire implements Serializable {
         this.datecom = datecom;
     }
 
-    public boolean isIsapprouve() {
+    public boolean getIsapprouve() {
         return isapprouve;
     }
 
@@ -81,7 +81,7 @@ public class Commentaire implements Serializable {
         this.id = id;
     }
 
-    
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -106,5 +106,5 @@ public class Commentaire implements Serializable {
     public String toString() {
         return "org.test.entity.Commentaire[ id=" + id + " ]";
     }
-    
+
 }
