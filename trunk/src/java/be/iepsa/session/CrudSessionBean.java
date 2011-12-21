@@ -162,9 +162,10 @@ public class CrudSessionBean {
         if(u.getLogin().equals("admin")||u.getLogin().equals(null)){
             return false;
         }else{
-           Query q =  em.createQuery("DELETE FROM TBL_UTILISATEUR  u WHERE ID=:id");
-            q.setParameter("id", id);
+           Query q =  em.createQuery("DELETE FROM User u WHERE u.login < :id");
+            q.setParameter("id", id);          
             q.executeUpdate();
+            
             return true;
         }
     }
