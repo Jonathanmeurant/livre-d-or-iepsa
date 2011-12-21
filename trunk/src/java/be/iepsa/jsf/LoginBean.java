@@ -5,6 +5,10 @@
 package be.iepsa.jsf;
 
 import be.iepsa.model.Commentaire;
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -48,20 +52,20 @@ public class LoginBean implements Serializable{
     // */
     public LoginBean() {
         super();
-
+        
     }
     @PostConstruct
     public void init() {
         setAdmin();
     }
-
+    
     public List<Commentaire> getListcom() {
-
-          listcom= c.getCommentListApproved();
+          
+          listcom= c.getCommentListApproved();    
           return listcom;
     }
         public List<Commentaire> getListcomFalse() {
-
+          
           listcom= c.getCommentListNoApproved();
           return listcom;
     }
@@ -69,7 +73,7 @@ public class LoginBean implements Serializable{
     public void setListcom(List<Commentaire> listcom) {
         this.listcom = listcom;
     }
-
+    
     public String getMdp() {
         return mdp;
     }
@@ -85,7 +89,7 @@ public class LoginBean implements Serializable{
     public void setNomUti(String nomUti) {
         this.nomUti = nomUti;
     }
-
+    
     public Boolean getIsnew() {
         return isnew;
     }
@@ -127,18 +131,28 @@ public class LoginBean implements Serializable{
     public boolean isConnected(){
       //*
        User u = c.getUser(nomUti);
-
+       
        //User u = em.find(User.class, nomUti);
-
+       
        if(u != null){
-           if(nomUti.equals(u.getLogin())&& mdp.equals(u.getPassword())){
+           
+           String cryptedmdp="";
+            try 
+            {
+               cryptedmdp = c.encrypt(mdp);
+            } catch (NoSuchAlgorithmException ex) {
+                Logger.getLogger(LoginBean.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (UnsupportedEncodingException ex) {
+                Logger.getLogger(LoginBean.class.getName()).log(Level.SEVERE, null, ex);
+            }
+           if(nomUti.equals(u.getLogin())&& cryptedmdp.equals(u.getPassword())){
                 isconnected = true;
            }
        }
        //*/
        return isconnected;
     }
-
+       
      public String logout(){
         nomUti = "";
         mdp = "";
@@ -157,7 +171,7 @@ public class LoginBean implements Serializable{
             FacesMessage facesmsg = new FacesMessage("Message proposé en attente de la validation de l'admin !");
             FacesContext.getCurrentInstance().addMessage(null, facesmsg);
         }
-
+        
         return "";
     }
     public String nouveauMembre(){
@@ -179,16 +193,16 @@ public class LoginBean implements Serializable{
             admin.setNom("admin");
             c.createUser2(admin);
         }
-
-
+         
+        
     }
-
+    
     public void updateCommentaire(Commentaire com){
         com.setIsapprouve(!com.getIsapprouve());
-        FacesMessage facesmsg = new FacesMessage("le commentaire à été validé");
-        FacesContext.getCurrentInstance().addMessage(null, facesmsg);
+    FacesMessage facesmsg = new FacesMessage("le commentaire à été validé");
+    FacesContext.getCurrentInstance().addMessage(null, facesmsg);
         c.update(com);
     }
-
-
+  
+    
 }
