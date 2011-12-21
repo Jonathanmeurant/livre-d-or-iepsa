@@ -7,13 +7,19 @@ package be.iepsa.session;
 
 import be.iepsa.model.Commentaire;
 import be.iepsa.model.User;
+import java.io.UnsupportedEncodingException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+import sun.misc.BASE64Encoder;
 
 /**
  *
@@ -47,7 +53,7 @@ public class CrudSessionBean {
     public List<User> getListUsers(){
         return em.createQuery("Select u from User u").getResultList();
     }
-
+    
     public List<Commentaire>getCommentListApproved(){
 
         List<Commentaire> l = new ArrayList<Commentaire>();       
@@ -92,7 +98,15 @@ public class CrudSessionBean {
 
     public void createUser2(User u) {
         // implanter la methode sha1
-
+        String pass= u.getPassword();
+        try {
+            u.setPassword(encrypt(pass));
+        } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(CrudSessionBean.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (UnsupportedEncodingException ex) {
+            Logger.getLogger(CrudSessionBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         em.persist(u);
     }
 
@@ -126,4 +140,17 @@ public class CrudSessionBean {
         Commentaire c = em.find(Commentaire.class, com.getId());
         c.setIsapprouve(com.getIsapprouve());
     }
+ 
+    
+    public String encrypt(String plaintext) throws NoSuchAlgorithmException, UnsupportedEncodingException 
+  {
+    MessageDigest md = null;
+ 
+      md = MessageDigest.getInstance("SHA"); 
+      md.update(plaintext.getBytes("UTF-8")); 
+   
+      byte raw[] = md.digest(); 
+    String hash = (new BASE64Encoder()).encode(raw); 
+    return hash; 
+  }
 }
