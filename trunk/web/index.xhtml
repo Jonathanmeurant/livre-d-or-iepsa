@@ -14,59 +14,59 @@
             <table align="right" width="20%">
                 <tr>
                     <td>
-                       <h:outputText  value="Bienvenue #{loginBean.nomUti}"/> <br/>
-                         <h:commandButton  value="Se deconnecter" action="#{loginBean.logout()}"/>
-                         <p></p>
-                         <h:outputLabel value="Commentaire approuvé" rendered="#{loginBean.utilisateur.isAdmin}"></h:outputLabel>
-                         <p></p>
-                 <!-- liste de commentaire , je ne sais pas comment afficher seulement
-                 les false pour l'admin et les true juste pour les simple utilisateur ainsi que la validation par l'admin-->
-                 <h:dataTable value ="#{loginBean.listcom}" var="commentaire" rendered="#{loginBean.utilisateur.isAdmin}">
-                                <h:column>
-                                   <f:facet name="header" > commentaire</f:facet>
-                                    #{commentaire.commentaire}
-                                </h:column>
+                        <h:outputText  value="Bienvenue #{loginBean.nomUti}"/> <br/>
+                        <h:commandButton  value="Se deconnecter" action="#{loginBean.logout()}"/>
+                        <p></p>
+                        <h:outputLabel value="Commentaire approuvé" rendered="#{loginBean.utilisateur.isAdmin}"></h:outputLabel>
+                        <p></p>
+                        <!-- liste de commentaire , je ne sais pas comment afficher seulement
+                        les false pour l'admin et les true juste pour les simple utilisateur ainsi que la validation par l'admin-->
+                        <h:dataTable value ="#{loginBean.listcom}" var="commentaire" rendered="#{loginBean.utilisateur.isAdmin}">
+                            <h:column>
+                                <f:facet name="header" > commentaire</f:facet>
+                                #{commentaire.commentaire}
+                            </h:column>
 
-                                <h:column>
-                                   <f:facet name="header" > datecommentaire</f:facet>
-                                     #{commentaire.datecom}
-                                 </h:column>
+                            <h:column>
+                                <f:facet name="header" > datecommentaire</f:facet>
+                                #{commentaire.datecom}
+                            </h:column>
 
-                                   <h:column>
-                                   <f:facet name="header" > approuve</f:facet>
-                                    #{commentaire.isapprouve}
-                                   </h:column>
-                                   <h:column>
-                                   <f:facet name="header" > validation</f:facet>
-                                   <h:commandButton  value="devalider" action="#{loginBean.updateCommentaire(commentaire)}"/>
-                                   </h:column>
-                            </h:dataTable>
-                                <p></p>
-                                <p></p>
-                          <h:outputLabel value="Commentaire en attente" rendered="#{loginBean.utilisateur.isAdmin}"></h:outputLabel>
-                         <p></p>
+                            <h:column>
+                                <f:facet name="header" > approuve</f:facet>
+                                #{commentaire.isapprouve}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header" > validation</f:facet>
+                                <h:commandButton  value="devalider" action="#{loginBean.updateCommentaire(commentaire)}"/>
+                            </h:column>
+                        </h:dataTable>
+                        <p></p>
+                        <p></p>
+                        <h:outputLabel value="Commentaire en attente" rendered="#{loginBean.utilisateur.isAdmin}"></h:outputLabel>
+                        <p></p>
 
-                 <h:dataTable value ="#{loginBean.listcomFalse}" var="commentaire" rendered="#{loginBean.utilisateur.isAdmin}">
-                                <h:column>
-                                   <f:facet name="header" > commentaire</f:facet>
-                                    #{commentaire.commentaire}
-                                </h:column>
+                        <h:dataTable value ="#{loginBean.listcomFalse}" var="commentaire" rendered="#{loginBean.utilisateur.isAdmin}">
+                            <h:column>
+                                <f:facet name="header" > commentaire</f:facet>
+                                #{commentaire.commentaire}
+                            </h:column>
 
-                                <h:column>
-                                   <f:facet name="header" > datecommentaire</f:facet>
-                                     #{commentaire.datecom}
-                                 </h:column>
+                            <h:column>
+                                <f:facet name="header" > datecommentaire</f:facet>
+                                #{commentaire.datecom}
+                            </h:column>
 
-                                   <h:column>
-                                   <f:facet name="header" > approuve</f:facet>
-                                    #{commentaire.isapprouve}
-                                   </h:column>
-                                   <h:column>
-                                   <f:facet name="header" > validation</f:facet>
-                                   <h:commandButton  value="valider" action="#{loginBean.updateCommentaire(commentaire)}"/>
-                                   </h:column>
-                            </h:dataTable>
-                                <p></p>
+                            <h:column>
+                                <f:facet name="header" > approuve</f:facet>
+                                #{commentaire.isapprouve}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header" > validation</f:facet>
+                                <h:commandButton  value="valider" action="#{loginBean.updateCommentaire(commentaire)}"/>
+                            </h:column>
+                        </h:dataTable>
+                        <p></p>
                     </td>
                 </tr>
             </table>
@@ -88,22 +88,22 @@
         </h:form>
         <h:form rendered="#{loginBean.isnew}"> <!-- -->
             <h:panelGrid border="1" columns="2">
-            <h:outputText  value="Nom utilisateur"/>
-            <h:inputText value="#{loginBean.utilisateur.login}"/> 
-            <h:outputText  value="Mot de passe"/>
-            <h:inputSecret value="#{loginBean.utilisateur.password}"/>
-            <h:outputText  value="Nom"/>
-            <h:inputText value="#{loginBean.utilisateur.nom}"/> 
-            <h:outputText  value="Prenom"/>
-            <h:inputText value="#{loginBean.utilisateur.prenom}"/>
-            <h:outputText  value="Email"/>
-            <h:inputText value="#{loginBean.utilisateur.email}"/>
+                <h:outputText  value="Nom utilisateur"/>
+                <h:inputText value="#{loginBean.utilisateur.login}"/> 
+                <h:outputText  value="Mot de passe"/>
+                <h:inputSecret value="#{loginBean.utilisateur.password}"/>
+                <h:outputText  value="Nom"/>
+                <h:inputText value="#{loginBean.utilisateur.nom}"/> 
+                <h:outputText  value="Prenom"/>
+                <h:inputText value="#{loginBean.utilisateur.prenom}"/>
+                <h:outputText  value="Email"/>
+                <h:inputText value="#{loginBean.utilisateur.email}"/>
             </h:panelGrid>
             <h:commandButton  value="enregistrer" action="#{loginBean.nouveauMembre}"/>
 
         </h:form>
-      <table align="left" width="10%" height="100%">
-             <tr>
+        <table align="left" width="10%" height="70%">
+            <tr>
                 <td>
                     <h:dataTable value="#{loginBean.listcom}" var="commentaire">
                         <h:column>
@@ -119,14 +119,30 @@
                             #{commentaire.user.login}
                         </h:column>
                     </h:dataTable>
-                     <h:form rendered="#{loginBean.connected}"><!-- -->
+                    <h:form rendered="#{loginBean.connected}"><!-- -->
                         <h:inputTextarea  value="#{loginBean.message}"/> <br/>
                         <h:commandButton  value="Proposer" action="#{loginBean.nouveauMessage}"/>
                     </h:form>
                 </td>
             </tr>
+            <td>
+            <h:form rendered="#{loginBean.utilisateur.isAdmin}"> 
+           
+                <h:dataTable value ="#{loginBean.listuser}" var ="user">
+                 <h:column>
+                     <f:facet name ="header">Utilisateur</f:facet>
+                     #{user.login}
+                 </h:column>
+                    <h:column>
+                        <f:facet name="header">administration</f:facet>
+                        <h:commandButton value="supprimer" action="#{loginBean.deleteuser(user.login)}"/>
+                    </h:column>
+                </h:dataTable>
+              </h:form>
+            </td>
         </table>
 
+        
     </h:body>
 </html>
 
