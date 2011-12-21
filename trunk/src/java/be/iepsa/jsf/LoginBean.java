@@ -210,9 +210,29 @@ public class LoginBean implements Serializable{
         userlist = c.getListUsers();
         return userlist;
     }
-    public void deleteuser(String login){
-        c.delUser(login);
+    
+    public void deleteuser(User u){
+       if(c.delUser(u.getLogin())){
+           FacesMessage facesmsg = new FacesMessage("l utilisateur à été supprimé");
+           FacesContext.getCurrentInstance().addMessage(null, facesmsg);
+       }else
+       {
+           FacesMessage facesmsg = new FacesMessage("l'utilisateur n a pas été supprimé");
+           FacesContext.getCurrentInstance().addMessage(null, facesmsg);
+       }
     }
-  
+    public boolean getIsAdmin(){
+        boolean isadmin=false;
+        if (isConnected()){
+            if(utilisateur.getLogin().equals("admin")){
+                isadmin= true;
+            }
+            else{
+                isadmin= false;
+            }
+        }
+        return isadmin;
+    }
+    
     
 }
